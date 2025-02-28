@@ -49,9 +49,9 @@ jobs:
       - name: Deploy to Staging Server
         uses: appleboy/ssh-action@v0.1.10
         with:
-          host: ${{ secrets.3.108.221.9 }}
-          username: ${{ secrets.ubuntu }}
-          key: ${{ secrets.abhi.pem }}
+          host: ${{ secrets.STAGING_SERVER_IP }}
+          username: ${{ secrets.STAGING_SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             docker pull siddamjayachandra/my-app:latest
             docker stop my-app || true
