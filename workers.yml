@@ -21,7 +21,7 @@ jobs:
         run: pip install -r requirements.txt  # Modify for your project
 
       - name: Run Unit Tests
-        run: pytest  #  this based on your test framework
+        run: pytest  # adjust this based on your test framework
 
   build-and-push:
     needs: test
