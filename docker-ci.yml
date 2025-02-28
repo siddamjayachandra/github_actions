@@ -34,13 +34,13 @@ jobs:
         uses: docker/setup-buildx-action@v2
 
       - name: Log in to Docker Hub
-        run: echo "${{ secrets.Jcnaidu@98 }}" | docker login -u "${{ secrets.siddamjayachandra }}" --password-stdin
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
       - name: Build and Push Docker Image
         run: |
           docker build -t my-app:${{ github.sha }} .
-          docker tag my-app:${{ github.sha }} mydockerhubusername/my-app:latest
-          docker push mydockerhubusername/my-app:latest
+          docker tag my-app:${{ github.sha }} siddamjayachandra/my-app:latest
+          docker push siddamjayachandra/my-app:latest
 
   deploy:
     needs: build-and-push
@@ -53,8 +53,8 @@ jobs:
           username: ${{ secrets.ubuntu }}
           key: ${{ secrets.abhi.pem }}
           script: |
-            docker pull mydockerhubusername/my-app:latest
+            docker pull siddamjayachandra/my-app:latest
             docker stop my-app || true
             docker rm my-app || true
-            docker run -d -p 80:80 --name my-app mydockerhubusername/my-app:latest
+            docker run -d -p 80:80 --name my-app siddamjayachandra/my-app:latest
 
